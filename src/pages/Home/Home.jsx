@@ -1,12 +1,27 @@
 import MoviesList from 'components/MoviesList/MoviesList';
 import css from './home.module.css';
-function Home() {
+import { apiHandler } from 'helpers/apiHandler';
+import { useEffect, useState } from 'react';
+const Home = () => {
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    const getMovies = async () => {
+      try {
+        const { results } = await apiHandler('trending/all/day');
+        setMovies(results);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getMovies();
+  }, []);
   return (
     <div>
       <h1 className={css.title}>Trending today</h1>
-      <MoviesList />
+      <MoviesList moviesArr={movies} url={'/movies/'} />
     </div>
   );
-}
+};
 
 export default Home;

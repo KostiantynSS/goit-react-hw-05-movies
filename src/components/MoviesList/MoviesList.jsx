@@ -1,26 +1,13 @@
-import { apiHandler } from 'helpers/apiHandler';
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-const MoviesList = () => {
-  const [movies, setMovies] = useState([]);
-
-  useEffect(() => {
-    const getMovies = async () => {
-      try {
-        const { results } = await apiHandler('trending/all/day');
-        setMovies(results);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getMovies();
-  }, []);
-
+import { Link, useLocation } from 'react-router-dom';
+const MoviesList = ({ moviesArr, url }) => {
+  const location = useLocation();
   return (
     <ul>
-      {movies.map(({ id, title, name }) => (
+      {moviesArr.map(({ id, title, name }) => (
         <li key={id}>
-          <Link to={`movies/${id}`}>{title || name}</Link>
+          <Link to={`${url}${id}`} state={{ from: location }}>
+            {title || name}
+          </Link>
         </li>
       ))}
     </ul>

@@ -6,6 +6,7 @@ const Reviews = () => {
   const [reviews, setReview] = useState([]);
 
   useEffect(() => {
+    if (!movieId) return;
     const getReview = async () => {
       try {
         const { results } = await apiHandler(`movie/${movieId}/reviews`);
