@@ -4,9 +4,8 @@ import { apiHandler } from 'helpers/apiHandler';
 import { useSearchParams } from 'react-router-dom';
 const MoviesList = lazy(() => import('../../components/MoviesList/MoviesList'));
 const Movies = () => {
-  const [searchParams, setSearchParams] = useState({});
   const [searchResults, setSearchResults] = useState([]);
-  const [, setSearchQuery] = useSearchParams();
+  const [searchParams, setSearchQuery] = useSearchParams();
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -15,7 +14,6 @@ const Movies = () => {
     const query = elements[1].value;
     if (query.trim() === '') return;
 
-    setSearchParams({ query: query });
     setSearchQuery({ query: query });
     e.currentTarget.reset();
   };

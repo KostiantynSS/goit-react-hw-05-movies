@@ -1,5 +1,11 @@
 import { Suspense, useEffect, useState } from 'react';
-import { Link, Outlet, useParams, useLocation } from 'react-router-dom';
+import {
+  Link,
+  Outlet,
+  useParams,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import { apiHandler } from 'helpers/apiHandler';
 import css from './movieDetails.module.css';
 
@@ -7,13 +13,11 @@ const imgSrc = 'https://image.tmdb.org/t/p/w500/';
 export const defaultImg =
   'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
 const MovieDetails = () => {
+  const { movieId } = useParams();
+  const [Movie, setMovie] = useState({});
   const location = useLocation();
   const backLink = location.state?.from ?? '/';
-  console.log(backLink);
-  console.log(location);
-  const { movieId } = useParams();
-
-  const [Movie, setMovie] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getMovies = async () => {
@@ -21,11 +25,12 @@ const MovieDetails = () => {
         const response = await apiHandler(`movie/${movieId}`);
         setMovie(response);
       } catch (err) {
+        navigate('/movies');
         console.log(err);
       }
     };
     getMovies();
-  }, [movieId]);
+  }, [movieId, navigate]);
   const { title, backdrop_path, vote_average, genres, overview } = Movie;
   return (
     <div className={css.container}>
