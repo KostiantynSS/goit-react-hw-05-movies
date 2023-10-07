@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { apiHandler } from 'helpers/apiHandler';
-import { defaultImg } from 'components/MovieDetails/MovieDetails';
+import { defaultImg } from 'pages/MovieDetails/MovieDetails';
 const Cast = () => {
   const { movieId } = useParams();
   const [cast, setCast] = useState([]);

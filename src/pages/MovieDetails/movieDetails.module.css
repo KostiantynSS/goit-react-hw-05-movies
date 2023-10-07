@@ -1,0 +1,18 @@
+.back {
+  border-radius: 5px;
+  border: 1px solid black;
+  display: block;
+  margin: 15px 0;
+  padding: 5px;
+
+  text-decoration: none;
+  color: black;
+  width: fit-content;
+}
+.container {
+  padding: 15px;
+}
+.back:is(:hover, :focus) {
+  background-color: black;
+  color: white;
+}

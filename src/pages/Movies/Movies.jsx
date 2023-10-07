@@ -1,12 +1,14 @@
-import { Suspense, lazy, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import MoviesList from 'components/MoviesList/MoviesList';
 import css from './movies.module.css';
 import { apiHandler } from 'helpers/apiHandler';
-import { useSearchParams } from 'react-router-dom';
-const MoviesList = lazy(() => import('../../components/MoviesList/MoviesList'));
+import { useSearchParams, useLocation } from 'react-router-dom';
+
 const Movies = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [searchParams, setSearchQuery] = useSearchParams();
-
+  const location = useLocation();
+  console.log(location);
   const handleSubmit = e => {
     e.preventDefault();
 
@@ -47,9 +49,8 @@ const Movies = () => {
           />
         </form>
       </div>
-      <Suspense fallback={<div>Wait a second...</div>}>
-        <MoviesList moviesArr={searchResults} url={''} />
-      </Suspense>
+
+      <MoviesList moviesArr={searchResults} />
     </>
   );
 };
