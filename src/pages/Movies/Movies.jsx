@@ -50,7 +50,7 @@ const Movies = () => {
         </form>
       </div>
 
-      <MoviesList moviesArr={searchResults} />
+      <MoviesList moviesArr={searchResults} searchParams={searchParams} />
     </>
   );
 };
